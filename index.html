@@ -7,39 +7,51 @@
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
-  --bg: #ffffff; --bg2: #f5f4f0; --text: #1a1a18; --text2: #6b6b66; --border: rgba(0,0,0,0.12);
+  --bg: #ffffff; --bg2: #f5f4f0; --bg3: #eeede9; --text: #1a1a18; --text2: #6b6b66; --border: rgba(0,0,0,0.1);
   --purple: #534AB7; --purple-light: #EEEDFE; --purple-mid: #CECBF6;
-  --teal: #0F6E56; --teal-light: #E1F5EE; --teal-mid: #9FE1CB;
-  --blue: #185FA5; --blue-light: #E6F1FB; --blue-mid: #B5D4F4;
-  --amber: #854F0B; --amber-light: #FAEEDA; --amber-mid: #FAC775;
-  --coral: #993C1D; --coral-light: #FAECE7; --coral-mid: #F5C4B3;
-  --pink: #993556; --pink-light: #FBEAF0; --pink-mid: #F4C0D1;
+  --teal: #0F6E56;   --teal-light: #E1F5EE;   --teal-mid: #9FE1CB;
+  --blue: #185FA5;   --blue-light: #E6F1FB;   --blue-mid: #B5D4F4;
+  --amber: #854F0B;  --amber-light: #FAEEDA;  --amber-mid: #FAC775;
+  --coral: #993C1D;  --coral-light: #FAECE7;  --coral-mid: #F5C4B3;
+  --pink: #993556;   --pink-light: #FBEAF0;   --pink-mid: #F4C0D1;
 }
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: #1c1c1a; --bg2: #252523; --text: #e8e6de; --text2: #9c9a92; --border: rgba(255,255,255,0.1);
+    --bg: #1c1c1a; --bg2: #252523; --bg3: #2e2e2b; --text: #e8e6de; --text2: #9c9a92; --border: rgba(255,255,255,0.09);
     --purple-light: #26215C; --purple-mid: #3C3489;
-    --teal-light: #04342C; --teal-mid: #085041;
-    --blue-light: #042C53; --blue-mid: #0C447C;
-    --amber-light: #412402; --amber-mid: #633806;
-    --coral-light: #4A1B0C; --coral-mid: #712B13;
-    --pink-light: #4B1528; --pink-mid: #72243E;
+    --teal-light: #04342C;   --teal-mid: #085041;
+    --blue-light: #042C53;   --blue-mid: #0C447C;
+    --amber-light: #412402;  --amber-mid: #633806;
+    --coral-light: #4A1B0C;  --coral-mid: #712B13;
+    --pink-light: #4B1528;   --pink-mid: #72243E;
   }
 }
-body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); padding: 32px 24px; max-width: 780px; margin: 0 auto; }
-h1 { font-size: 20px; font-weight: 500; margin-bottom: 6px; }
-.subtitle { font-size: 13px; color: var(--text2); margin-bottom: 24px; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); padding: 28px 24px; max-width: 820px; margin: 0 auto; }
+h1 { font-size: 20px; font-weight: 600; margin-bottom: 4px; }
+.subtitle { font-size: 13px; color: var(--text2); margin-bottom: 22px; }
 
-/* ── TYPE TABS ── */
+/* ── TOP-LEVEL MODE TABS ── */
+.mode-row { display: flex; gap: 6px; margin-bottom: 20px; border-bottom: 1px solid var(--border); padding-bottom: 0; }
+.mode-tab {
+  padding: 9px 18px 10px; font-size: 13px; font-weight: 500; cursor: pointer;
+  border: none; background: transparent; color: var(--text2); font-family: inherit;
+  border-bottom: 2px solid transparent; margin-bottom: -1px; transition: all .15s;
+  display: flex; align-items: center; gap: 7px;
+}
+.mode-tab svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.mode-tab:hover { color: var(--text); }
+.mode-tab.active { color: var(--purple); border-bottom-color: var(--purple); }
+
+/* ── PROJECT TYPE SUB-TABS (Detailed view) ── */
 .type-row { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
 .type-tab {
-  display: flex; align-items: center; gap: 6px;
-  padding: 7px 13px; border-radius: 20px; border: 1px solid var(--border);
-  background: var(--bg2); color: var(--text2); font-size: 12px; cursor: pointer;
-  transition: all .2s; white-space: nowrap; font-family: inherit; font-weight: 500;
+  display: flex; align-items: center; gap: 6px; padding: 7px 13px;
+  border-radius: 20px; border: 1px solid var(--border); background: var(--bg2);
+  color: var(--text2); font-size: 12px; cursor: pointer; transition: all .2s;
+  white-space: nowrap; font-family: inherit; font-weight: 500;
 }
-.type-tab:hover { color: var(--text); border-color: rgba(0,0,0,0.2); }
-.type-tab svg { width: 14px; height: 14px; flex-shrink: 0; stroke: currentColor; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.type-tab svg { width: 13px; height: 13px; stroke: currentColor; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+.type-tab:hover { color: var(--text); }
 .type-tab.active { color: #fff; border-color: transparent; }
 .type-tab[data-type="overarching"].active { background: var(--purple); }
 .type-tab[data-type="print"].active       { background: var(--teal); }
@@ -55,120 +67,166 @@ h1 { font-size: 20px; font-weight: 500; margin-bottom: 6px; }
 .toggle-btn[data-view="internal"].active { background: var(--purple); color: #fff; }
 .toggle-btn[data-view="external"].active { background: #1D9E75; color: #fff; }
 
-/* ── PANEL WRAPPER ── */
-.panel-wrap { position: relative; }
-
-/* ── PANEL HEADER with left-border accent ── */
+/* ── PANEL HEADER ── */
+.panel-wrap { animation: fadeSlide 0.22s ease both; }
+@keyframes fadeSlide { from { opacity:0; transform:translateY(5px); } to { opacity:1; transform:translateY(0); } }
 .flow-header {
   display: flex; align-items: flex-start; justify-content: space-between;
-  margin-bottom: 24px; padding: 14px 16px;
-  border-radius: 10px; background: var(--bg2);
-  border-left: 4px solid var(--accent-color, #534AB7);
-  gap: 12px;
+  margin-bottom: 24px; padding: 14px 16px; border-radius: 10px;
+  background: var(--bg2); border-left: 4px solid var(--accent-color, var(--purple)); gap: 12px;
 }
 .flow-header-text { flex: 1; }
-.flow-title { font-size: 16px; font-weight: 600; margin-bottom: 3px; }
-.flow-sub { font-size: 12px; color: var(--text2); }
-.step-count {
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  background: var(--accent-color, #534AB7); color: #fff;
-  border-radius: 8px; padding: 6px 12px; flex-shrink: 0; min-width: 56px;
-  opacity: 0.9;
-}
+.flow-title { font-size: 16px; font-weight: 600; margin-bottom: 4px; }
+.flow-sub { font-size: 12px; color: var(--text2); line-height: 1.5; }
+.step-count { display: flex; flex-direction: column; align-items: center; justify-content: center; background: var(--accent-color, var(--purple)); color: #fff; border-radius: 8px; padding: 6px 12px; flex-shrink: 0; min-width: 56px; }
 .step-count-num { font-size: 20px; font-weight: 600; line-height: 1; }
-.step-count-label { font-size: 10px; opacity: 0.85; margin-top: 2px; letter-spacing: 0.03em; }
+.step-count-label { font-size: 10px; opacity: 0.85; margin-top: 2px; letter-spacing: 0.04em; }
 
 /* ── PHASE LABELS ── */
-.phase-label {
-  font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
-  color: var(--text2); margin: 18px 0 6px 44px; opacity: 0.7;
+.phase-block { margin: 22px 0 0; }
+.phase-block:first-child { margin-top: 0; }
+.phase-header {
+  display: flex; align-items: center; gap: 10px; margin-bottom: 12px;
 }
-.phase-label:first-child { margin-top: 0; }
+.phase-line { flex: 1; height: 1px; background: var(--border); }
+.phase-name {
+  font-size: 10px; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase;
+  color: var(--accent-color, var(--purple)); white-space: nowrap; opacity: 0.8;
+}
 
 /* ── STEPS ── */
 .steps { display: flex; flex-direction: column; }
 .step { display: flex; align-items: flex-start; gap: 12px; }
 .step-spine { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; width: 32px; }
-
-.step-icon-wrap {
-  width: 32px; height: 32px; border-radius: 50%;
-  display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 4px;
-  transition: transform .15s;
-}
-.step-icon-wrap svg { width: 15px; height: 15px; fill: none; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
-
-/* Animated connector line */
-.step-line {
-  width: 2px; flex: 1; min-height: 10px;
-  background: var(--line-color, #CECBF6);
-  transform-origin: top;
-  animation: drawLine 0.4s ease both;
-}
-@keyframes drawLine { from { transform: scaleY(0); opacity: 0; } to { transform: scaleY(1); opacity: 1; } }
+.step-icon-wrap { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 4px; background: var(--icon-bg, var(--purple-light)); transition: transform .15s; }
+.step-icon-wrap svg { width: 15px; height: 15px; fill: none; stroke: var(--icon-stroke, var(--purple)); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.step-line { width: 2px; flex: 1; min-height: 10px; background: var(--line-color, var(--purple-mid)); transform-origin: top; animation: drawLine 0.35s ease both; }
+@keyframes drawLine { from { transform:scaleY(0); opacity:0; } to { transform:scaleY(1); opacity:1; } }
 .step:last-child > .step-spine > .step-line { display: none; }
-
-.step-body { padding: 6px 0 14px; flex: 1; min-width: 0; }
-
-/* Expandable step header */
-.step-trigger {
-  display: flex; align-items: center; justify-content: space-between;
-  cursor: pointer; gap: 8px; user-select: none;
-}
-.step-trigger:hover .step-label { opacity: 0.8; }
+.step-body { padding: 5px 0 14px; flex: 1; min-width: 0; }
+.step-trigger { display: flex; align-items: center; justify-content: space-between; cursor: pointer; gap: 8px; user-select: none; }
 .step-label { font-size: 15px; font-weight: 500; line-height: 1.35; flex: 1; }
-.step-chevron {
-  width: 16px; height: 16px; flex-shrink: 0; opacity: 0.35;
-  transition: transform .2s, opacity .2s;
-  fill: none; stroke: var(--text); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
-}
-.step.open .step-chevron { transform: rotate(180deg); opacity: 0.6; }
-
-/* Expandable content */
-.step-expand {
-  overflow: hidden; max-height: 0;
-  transition: max-height 0.28s ease, opacity 0.2s ease;
-  opacity: 0;
-}
-.step.open .step-expand { max-height: 400px; opacity: 1; }
-.step-expand-inner { padding-top: 6px; }
-.step-note { font-size: 12px; color: var(--text2); line-height: 1.55; }
 .opt { font-weight: 400; font-size: 11px; color: var(--text2); }
-
-/* Sub-steps */
-.sub-steps { display: flex; flex-direction: column; margin: 8px 0 2px 0; padding-left: 10px; border-left: 2px dashed var(--line-color, #CECBF6); }
+.step-chevron { width: 15px; height: 15px; flex-shrink: 0; opacity: 0.3; transition: transform .2s, opacity .2s; fill: none; stroke: var(--text); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.step.open .step-chevron { transform: rotate(180deg); opacity: 0.6; }
+.step-expand { overflow: hidden; max-height: 0; transition: max-height 0.28s ease, opacity 0.2s ease; opacity: 0; }
+.step.open .step-expand { max-height: 500px; opacity: 1; }
+.step-expand-inner { padding-top: 7px; }
+.step-note { font-size: 12px; color: var(--text2); line-height: 1.6; }
+.sub-steps { display: flex; flex-direction: column; margin: 8px 0 2px; padding-left: 10px; border-left: 2px dashed var(--line-color, var(--purple-mid)); }
 .sub-step { display: flex; align-items: flex-start; gap: 7px; padding: 3px 0; }
-.sub-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; margin-top: 5px; background: var(--accent-color, #534AB7); opacity: 0.5; }
+.sub-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; margin-top: 5px; background: var(--accent-color, var(--purple)); opacity: 0.5; }
 .sub-label { font-size: 12px; color: var(--text2); line-height: 1.45; }
 
-/* Color theming via CSS vars per panel */
-.col-purple { --accent-color: var(--purple); --icon-bg: var(--purple-light); --icon-stroke: var(--purple); --line-color: var(--purple-mid); }
-.col-teal   { --accent-color: var(--teal);   --icon-bg: var(--teal-light);   --icon-stroke: var(--teal);   --line-color: var(--teal-mid);   }
-.col-blue   { --accent-color: var(--blue);   --icon-bg: var(--blue-light);   --icon-stroke: var(--blue);   --line-color: var(--blue-mid);   }
-.col-amber  { --accent-color: var(--amber);  --icon-bg: var(--amber-light);  --icon-stroke: var(--amber);  --line-color: var(--amber-mid);  }
-.col-coral  { --accent-color: var(--coral);  --icon-bg: var(--coral-light);  --icon-stroke: var(--coral);  --line-color: var(--coral-mid);  }
-.col-pink   { --accent-color: var(--pink);   --icon-bg: var(--pink-light);   --icon-stroke: var(--pink);   --line-color: var(--pink-mid);   }
+/* ── COLOR THEMES ── */
+.col-purple { --accent-color:var(--purple); --icon-bg:var(--purple-light); --icon-stroke:var(--purple); --line-color:var(--purple-mid); }
+.col-teal   { --accent-color:var(--teal);   --icon-bg:var(--teal-light);   --icon-stroke:var(--teal);   --line-color:var(--teal-mid);   }
+.col-blue   { --accent-color:var(--blue);   --icon-bg:var(--blue-light);   --icon-stroke:var(--blue);   --line-color:var(--blue-mid);   }
+.col-amber  { --accent-color:var(--amber);  --icon-bg:var(--amber-light);  --icon-stroke:var(--amber);  --line-color:var(--amber-mid);  }
+.col-coral  { --accent-color:var(--coral);  --icon-bg:var(--coral-light);  --icon-stroke:var(--coral);  --line-color:var(--coral-mid);  }
+.col-pink   { --accent-color:var(--pink);   --icon-bg:var(--pink-light);   --icon-stroke:var(--pink);   --line-color:var(--pink-mid);   }
 
-.step-icon-wrap { background: var(--icon-bg); }
-.step-icon-wrap svg { stroke: var(--icon-stroke); }
+/* ── FULL SCOPE VIEW ── */
+.scope-intro {
+  background: var(--bg2); border-radius: 10px; padding: 16px 18px;
+  margin-bottom: 24px; border-left: 4px solid var(--purple);
+}
+.scope-intro p { font-size: 13px; color: var(--text2); line-height: 1.6; margin-bottom: 12px; }
+.scope-intro p:last-child { margin-bottom: 0; }
+.legend { display: flex; flex-wrap: wrap; gap: 8px; }
+.legend-item { display: flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 500; color: var(--text2); }
+.legend-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
 
-/* Panel entrance animation */
-.panel-wrap { animation: fadeSlide 0.25s ease both; }
-@keyframes fadeSlide { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+/* Scope step — universal vs specialty */
+.scope-step { display: flex; align-items: flex-start; gap: 12px; }
+.scope-step-spine { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; width: 32px; }
+.scope-step-icon {
+  width: 32px; height: 32px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 4px;
+}
+.scope-step-icon svg { width: 15px; height: 15px; fill: none; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.scope-step-line { width: 2px; flex: 1; min-height: 10px; animation: drawLine 0.35s ease both; }
+.scope-step:last-child .scope-step-line { display: none; }
+.scope-step-body { padding: 5px 0 14px; flex: 1; min-width: 0; }
+.scope-step-trigger { display: flex; align-items: flex-start; justify-content: space-between; cursor: pointer; gap: 10px; user-select: none; }
+.scope-step-label { font-size: 15px; font-weight: 500; line-height: 1.35; flex: 1; }
+.scope-step-label.universal { font-weight: 600; }
+
+/* Type badges */
+.type-badges { display: flex; flex-wrap: wrap; gap: 3px; margin-top: 5px; }
+.type-badge {
+  display: inline-flex; align-items: center; gap: 3px;
+  padding: 1px 7px; border-radius: 20px; font-size: 10px; font-weight: 400;
+  opacity: 0.9;
+}
+.badge-all {
+  background: var(--text); color: var(--bg); font-size: 10px; font-weight: 600;
+  padding: 2px 9px; border-radius: 20px; letter-spacing: 0.03em; opacity: 0.85;
+}
+.badge-purple { background: rgba(83,74,183,0.08); color: var(--text2); border: 1px solid rgba(83,74,183,0.18); }
+.badge-teal   { background: rgba(15,110,86,0.08); color: var(--text2);  border: 1px solid rgba(15,110,86,0.18);  }
+.badge-blue   { background: rgba(24,95,165,0.08); color: var(--text2);  border: 1px solid rgba(24,95,165,0.18);  }
+.badge-amber  { background: rgba(133,79,11,0.08); color: var(--text2);  border: 1px solid rgba(133,79,11,0.18);  }
+.badge-coral  { background: rgba(153,60,29,0.08); color: var(--text2);  border: 1px solid rgba(153,60,29,0.18);  }
+.badge-pink   { background: rgba(153,53,86,0.08); color: var(--text2);  border: 1px solid rgba(153,53,86,0.18);  }
+
+/* Universal step — bolder left treatment */
+.scope-step.is-universal .scope-step-icon { box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px #1a1a18; }
+@media (prefers-color-scheme: dark) { .scope-step.is-universal .scope-step-icon { box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px #e8e6de; } }
+
+.scope-expand { overflow: hidden; max-height: 0; transition: max-height 0.28s ease, opacity 0.2s ease; opacity: 0; }
+.scope-step.open .scope-expand { max-height: 300px; opacity: 1; }
+.scope-expand-inner { padding-top: 7px; }
+.scope-note { font-size: 12px; color: var(--text2); line-height: 1.6; }
+.scope-chevron { width: 15px; height: 15px; flex-shrink: 0; opacity: 0.25; margin-top: 3px; transition: transform .2s, opacity .2s; fill: none; stroke: var(--text); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.scope-step.open .scope-chevron { transform: rotate(180deg); opacity: 0.55; }
+
+/* Scope phase */
+.scope-phase { margin: 22px 0 0; }
+.scope-phase:first-child { margin-top: 0; }
+.scope-phase-header { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+.scope-phase-line { flex: 1; height: 1px; background: var(--border); }
+.scope-phase-name { font-size: 10px; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: var(--purple); white-space: nowrap; opacity: 0.8; }
+
+/* Step count for scope view */
+.scope-counts {
+  display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px;
+}
+.scope-count-pill {
+  display: flex; align-items: center; gap: 6px;
+  padding: 6px 12px; border-radius: 20px; background: var(--bg2);
+  border: 1px solid var(--border); font-size: 12px; font-weight: 500; color: var(--text2);
+}
+.scope-count-num { font-weight: 700; color: var(--text); }
 </style>
 </head>
 <body>
 <h1>MOD Project Workflows</h1>
-<p class="subtitle">Select a project type, then toggle between internal and external views. Click any step to expand details.</p>
+<p class="subtitle">A complete view of how MOD works — from first conversation to final delivery.</p>
 
-<div class="type-row" id="type-row"></div>
-<div class="toggle-bar" id="toggle-bar">
-  <button class="toggle-btn active" data-view="internal" onclick="selectView('internal')">Internal</button>
-  <button class="toggle-btn" data-view="external" onclick="selectView('external')">External</button>
+<div class="mode-row">
+  <button class="mode-tab active" id="tab-scope" onclick="setMode('scope')">
+    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3.6 9h16.8M3.6 15h16.8M12 3a17 17 0 0 1 0 18M12 3a17 17 0 0 0 0 18"/></svg>
+    Full Scope View
+  </button>
+  <button class="mode-tab" id="tab-detail" onclick="setMode('detail')">
+    <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>
+    Detailed View Per Project
+  </button>
 </div>
-<div id="main"></div>
+
+<div id="scope-view"></div>
+<div id="detail-view" style="display:none;">
+  <div class="type-row" id="type-row"></div>
+  <div class="toggle-bar" id="toggle-bar">
+    <button class="toggle-btn active" data-view="internal" onclick="selectView('internal')">Internal</button>
+    <button class="toggle-btn" data-view="external" onclick="selectView('external')">External</button>
+  </div>
+  <div id="detail-panel"></div>
+</div>
 
 <script>
-// ── SVG ICONS ────────────────────────────────────────────────────────────────
+// ── ICONS ─────────────────────────────────────────────────────────────────────
 const IC = {
   users:    `<svg viewBox="0 0 24 24"><path d="M9 7a4 4 0 1 0 8 0 4 4 0 0 0-8 0"/><path d="M3 21v-2a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v2"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/><path d="M21 21v-2a4 4 0 0 0-3-3.85"/></svg>`,
   file:     `<svg viewBox="0 0 24 24"><path d="M14 3v4a1 1 0 0 0 1 1h4"/><path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2z"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="15" y2="17"/></svg>`,
@@ -176,7 +234,7 @@ const IC = {
   pencil:   `<svg viewBox="0 0 24 24"><path d="M4 20h4l10.5-10.5a2.828 2.828 0 1 0-4-4L4 16v4"/><line x1="13.5" y1="6.5" x2="17.5" y2="10.5"/></svg>`,
   eye:      `<svg viewBox="0 0 24 24"><path d="M10 12a2 2 0 1 0 4 0 2 2 0 0 0-4 0"/><path d="M21 12c-2.4 4-5.4 6-9 6s-6.6-2-9-6c2.4-4 5.4-6 9-6s6.6 2 9 6"/></svg>`,
   check:    `<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg>`,
-  cert:     `<svg viewBox="0 0 24 24"><circle cx="15" cy="15" r="3"/><path d="M13 17.5V21l2-1 2 1v-3.5"/><path d="M10 19H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v8"/><line x1="6" y1="9" x2="18" y2="9"/><line x1="6" y1="13" x2="10" y2="13"/></svg>`,
+  cert:     `<svg viewBox="0 0 24 24"><circle cx="15" cy="15" r="3"/><path d="M13 17.5V21l2-1 2 1v-3.5"/><path d="M10 19H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v8"/><line x1="6" y1="9" x2="18" y2="9"/></svg>`,
   export:   `<svg viewBox="0 0 24 24"><path d="M14 3v4a1 1 0 0 0 1 1h4"/><path d="M11.5 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v5"/><path d="M15 18h6"/><path d="M18 15l3 3-3 3"/></svg>`,
   printer:  `<svg viewBox="0 0 24 24"><path d="M17 17h2a2 2 0 0 0 2-2v-4a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h2"/><path d="M17 9V5a2 2 0 0 0-2-2H9a2 2 0 0 0-2 2v4"/><rect x="7" y="13" width="10" height="8" rx="1"/></svg>`,
   checks:   `<svg viewBox="0 0 24 24"><path d="M7 12l5 5 7-7"/><path d="M2 12l5 5m5-5 7-7"/></svg>`,
@@ -209,392 +267,438 @@ const IC = {
   armchair: `<svg viewBox="0 0 24 24"><path d="M5 11V8a3 3 0 0 1 3-3h8a3 3 0 0 1 3 3v3"/><path d="M3 14a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-2z"/><line x1="5" y1="18" x2="5" y2="21"/><line x1="19" y1="18" x2="19" y2="21"/></svg>`,
   clipchk:  `<svg viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="M9 12l2 2 4-4"/></svg>`,
   video:    `<svg viewBox="0 0 24 24"><path d="M15 10l4.553-2.069A1 1 0 0 1 21 8.87v6.26a1 1 0 0 1-1.447.899L15 14"/><rect x="3" y="6" width="12" height="12" rx="2"/></svg>`,
-  // Tab icons
-  globe:    `<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3.6 9h16.8M3.6 15h16.8M12 3a17 17 0 0 1 0 18M12 3a17 17 0 0 0 0 18"/></svg>`,
-  print:    `<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 17h2a2 2 0 0 0 2-2v-4a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h2"/><path d="M17 9V5a2 2 0 0 0-2-2H9a2 2 0 0 0-2 2v4"/><rect x="7" y="13" width="10" height="8" rx="1"/></svg>`,
-  mail:     `<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3 7 12 13 21 7"/></svg>`,
-  film:     `<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><line x1="2" y1="9" x2="22" y2="9"/><line x1="2" y1="15" x2="22" y2="15"/><line x1="7" y1="4" x2="7" y2="9"/><line x1="17" y1="4" x2="17" y2="9"/><line x1="7" y1="15" x2="7" y2="20"/><line x1="17" y1="15" x2="17" y2="20"/></svg>`,
-  camera:   `<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 8h.01"/><path d="M3 8a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4v8a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V8z"/><circle cx="12" cy="12" r="3"/></svg>`,
-  layers:   `<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 20 7 12 12 4 7"/><polyline points="4 12 12 17 20 12"/><polyline points="4 17 12 22 20 17"/></svg>`,
+  layers:   `<svg viewBox="0 0 24 24"><polygon points="12 2 20 7 12 12 4 7"/><polyline points="4 12 12 17 20 12"/><polyline points="4 17 12 22 20 17"/></svg>`,
+  globe:    `<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3.6 9h16.8M3.6 15h16.8M12 3a17 17 0 0 1 0 18M12 3a17 17 0 0 0 0 18"/></svg>`,
+  printTab: `<svg viewBox="0 0 24 24"><path d="M17 17h2a2 2 0 0 0 2-2v-4a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h2"/><path d="M17 9V5a2 2 0 0 0-2-2H9a2 2 0 0 0-2 2v4"/><rect x="7" y="13" width="10" height="8" rx="1"/></svg>`,
+  mail:     `<svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3 7 12 13 21 7"/></svg>`,
+  film:     `<svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><line x1="2" y1="9" x2="22" y2="9"/><line x1="2" y1="15" x2="22" y2="15"/><line x1="7" y1="4" x2="7" y2="9"/><line x1="17" y1="4" x2="17" y2="9"/><line x1="7" y1="15" x2="7" y2="20"/><line x1="17" y1="15" x2="17" y2="20"/></svg>`,
+  camera:   `<svg viewBox="0 0 24 24"><path d="M15 8h.01"/><path d="M3 8a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4v8a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V8z"/><circle cx="12" cy="12" r="3"/></svg>`,
 };
+function ic(k) { return IC[k]||IC.file; }
+const chevSVG = `<svg class="scope-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>`;
+const chevSVG2 = `<svg class="step-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>`;
 
-function ic(name) { return IC[name] || IC.file; }
-const chevron = `<svg class="step-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>`;
+// ── TYPE METADATA ─────────────────────────────────────────────────────────────
+const TYPES = [
+  { id:'print',    label:'Print & digital', color:'teal',   badge:'badge-teal',   icon:'printTab' },
+  { id:'web',      label:'Web',             color:'blue',   badge:'badge-blue',   icon:'globe' },
+  { id:'email',    label:'Email',           color:'amber',  badge:'badge-amber',  icon:'mail' },
+  { id:'postprod', label:'Post-prod video', color:'coral',  badge:'badge-coral',  icon:'film' },
+  { id:'live',     label:'Live shoot',      color:'pink',   badge:'badge-pink',   icon:'camera' },
+];
+const ALL_IDS = TYPES.map(t=>t.id);
 
-// ── STEP / PHASE BUILDERS ─────────────────────────────────────────────────────
+function badges(typeIds) {
+  if (typeIds.length === ALL_IDS.length) return `<span class="badge-all">All project types</span>`;
+  return typeIds.map(id => {
+    const t = TYPES.find(x=>x.id===id);
+    return t ? `<span class="type-badge ${t.badge}">${t.label}</span>` : '';
+  }).join('');
+}
 
+// ── FULL SCOPE DATA ───────────────────────────────────────────────────────────
+// Each entry: [iconKey, label, detail, typeIds, isLastInPhase]
+const SCOPE_PHASES = [
+  {
+    name: 'Initiation',
+    steps: [
+      ['users',   'Client meeting / request',
+        'The starting point for every project. Goals, timeline, audience, and scope are discussed. For some project types (live shoot, post-prod video) this also covers format, platform, and talent needs.',
+        ALL_IDS],
+      ['file',    'Proposal & estimate development / approval',
+        'Internal team scopes deliverables and prepares a cost estimate. Sent to client for written sign-off before any work begins. Internal workflows include full breakdown; external view shows approval status.',
+        ALL_IDS],
+    ]
+  },
+  {
+    name: 'Planning',
+    steps: [
+      ['calendar','Planning / strategy',
+        'Internal project intake and setup. Varies by type: web projects require tech assessment and backend setup; video projects begin VO auditions; print/digital/email begins concepting and reference gathering.',
+        ALL_IDS],
+    ]
+  },
+  {
+    name: 'Pre-production',
+    steps: [
+      ['search',  'Tech assessment',
+        'Evaluates platform requirements, third-party integrations, and any legacy system considerations. Determines the technical approach before development begins.',
+        ['web']],
+      ['server',  'Backend setup',
+        'CMS, hosting environment, and staging server configured. Development environment ready for the build phase.',
+        ['web']],
+      ['notes',   'Script writing',
+        'Narrative and script developed from the approved brief. Tone, messaging, and structure aligned before any production begins.',
+        ['postprod','live']],
+      ['board',   'Design concepts / storyboards / copywriting',
+        'Visual direction and creative approach established. For live shoot and post-prod: storyboards and shot list. For print/digital/web: styleframes and copy.',
+        ['print','web','postprod','live']],
+      ['eye',     'Client review — concepts',
+        'Client reviews and provides consolidated feedback on the creative direction before production investment increases.',
+        ALL_IDS],
+      ['mic',     'VO auditions',
+        'Voiceover talent auditioned from a shortlist. Client selects their preferred voice before the recording session is scheduled.',
+        ['postprod','live']],
+      ['check',   'VO approval',
+        'Selected VO talent formally approved by client. Locks the choice before recording resources are committed.',
+        ['postprod','live']],
+      ['usearch', 'Casting auditions',
+        'On-camera talent auditioned and selected. May include actors, presenters, or interview subjects depending on the project.',
+        ['live']],
+      ['pin',     'Location selection',
+        'Locations scouted, evaluated, and confirmed. Permits obtained where required. Client sign-off on final locations.',
+        ['live']],
+      ['armchair','Set dressing / prop approval',
+        'All set elements, props, and wardrobe reviewed and approved by client before shoot day.',
+        ['live']],
+      ['clipchk', 'Final pre-production meeting',
+        'Full team alignment call. Shot list, schedule, logistics, talent, and contingencies all confirmed. Last checkpoint before production begins.',
+        ['live']],
+    ]
+  },
+  {
+    name: 'Production',
+    steps: [
+      ['pencil',  'Copywriting / design',
+        'Content and visual design developed across review rounds (R1, R2, R3…). R1 establishes direction; subsequent rounds refine based on client feedback.',
+        ['print','email']],
+      ['layout',  'Wireframe / UX',
+        'Full site wireframes produced showing structure, navigation flow, and content hierarchy. Foundation for development.',
+        ['web']],
+      ['video',   'Live shoot',
+        'On-location or studio filming. Director manages performance and shot list. Client may attend. All footage captured for post-production.',
+        ['live']],
+      ['code',    'Development',
+        'Front-end and back-end built on staging. Responsive across breakpoints. CMS, forms, and integrations configured. Email HTML coded to email-safe standards.',
+        ['web','email']],
+      ['cut',     'Editing / animation',
+        'Footage reviewed, selects pulled, and assembly cut built. Graphics and motion design added. Music temp track placed. For post-prod only projects, this follows storyboard approval.',
+        ['postprod','live']],
+      ['palette', 'Email / styleframe design',
+        'Visual design finalized. Email built to email-safe standards (inline CSS, ~600px max width). Web styleframes establish the full design system.',
+        ['web','email']],
+    ]
+  },
+  {
+    name: 'Review & Approval',
+    steps: [
+      ['eye',     'Client review rounds',
+        'Consolidated written feedback collected from the client. Multiple rounds (R1, R2, R3…) continue until the work meets the brief. Verbal feedback should always be followed up in writing.',
+        ALL_IDS],
+      ['cloud',   'Salesforce ID confirmations',
+        'List IDs, journey IDs, and sending domain confirmed with the Salesforce team before deployment.',
+        ['email']],
+      ['mic2',    'VO recording',
+        'Selected talent records the final approved script. Re-records captured as needed until the performance is locked.',
+        ['postprod','live']],
+      ['check',   'Client approval',
+        'Written sign-off on the final work. No further changes accepted after this point without a change order. Triggers the final production phase.',
+        ALL_IDS],
+    ]
+  },
+  {
+    name: 'Final Production',
+    steps: [
+      ['cert',    'Attestation',
+        'Required legal or compliance sign-off on content. Typically needed for regulated industries such as pharma and healthcare.',
+        ['print']],
+      ['export',  'Print files prep',
+        'Final files prepared to printer specs: correct color profile (CMYK), bleed, resolution, and file format (PDF/X-1a or as required).',
+        ['print']],
+      ['printer', 'Send to printer',
+        'Files transmitted to print vendor. Receipt and production timeline confirmed.',
+        ['print']],
+      ['checks',  'Print proof review / approval',
+        'Physical or digital proof reviewed before full print run. Color accuracy, trim, and fold all checked.',
+        ['print']],
+      ['bug',     'Final testing / QA',
+        'Cross-browser and cross-device testing for web. Email render testing via Litmus or Email on Acid. Links, UTM parameters, forms, and load speed audited.',
+        ['web','email']],
+      ['checks',  'Proof approval',
+        'Final live email proof approved by client and/or compliance before deployment.',
+        ['email']],
+      ['chart_b', 'Analytics / CMS / hosting setup',
+        'GA4 or analytics platform configured. CMS permissions and content training completed. Hosting DNS prep confirmed.',
+        ['web']],
+      ['sparkles','Finishing steps',
+        'Final mix, color grade, captions, music licensing, AD services, and all required deliverable variants completed. The final polish before export.',
+        ['postprod','live']],
+      ['access',  'ADA remediation',
+        'PDF made accessible per WCAG standards: tagged headings, alt text, reading order, and color contrast compliance.',
+        ['print']],
+      ['floppy',  'Final export',
+        'Master file and all required delivery specs exported and organized.',
+        ['postprod','live']],
+    ]
+  },
+  {
+    name: 'Delivery & Close-out',
+    steps: [
+      ['rocket',  'Deployment / push live',
+        'Web: site pushed from staging to production, DNS updated, redirect rules confirmed. Email: send confirmed and documented.',
+        ['web','email']],
+      ['truck',   'Shipped / mailed',
+        'Print job shipped or mailed to destination. Tracking information shared with client.',
+        ['print']],
+      ['package', 'Final files delivered',
+        'All production-ready assets organized and transferred to the client via the agreed method. Includes native files where applicable.',
+        ALL_IDS],
+      ['chart_l', 'Analytics dashboard & reporting',
+        'Performance dashboard configured and shared. First report delivered at agreed interval. Ongoing monitoring set up.',
+        ['web','email']],
+      ['receipt', 'Final billing',
+        'Invoice issued based on approved estimate plus any approved scope changes.',
+        ALL_IDS],
+      ['archive', 'Project closed',
+        'Project officially closed in the system. All files archived. Lessons learned noted for future projects.',
+        ALL_IDS],
+    ]
+  },
+];
+
+// ── RENDER FULL SCOPE VIEW ────────────────────────────────────────────────────
+function renderScopeView() {
+  const totalSteps = SCOPE_PHASES.reduce((a,p)=>a+p.steps.length,0);
+  const universalCount = SCOPE_PHASES.reduce((a,p)=>a+p.steps.filter(s=>s[3].length===ALL_IDS.length).length,0);
+  const specialtyCount = totalSteps - universalCount;
+
+  let html = `
+  <div class="scope-intro">
+    <p>This view shows every step across all MOD and MODHealth project types in a single unified flow. Steps marked <strong>"All project types"</strong> are the universal backbone present in every project. Steps with specific type badges are specialty steps that apply only to those project types.</p>
+    <p>Click any step to reveal more detail.</p>
+    <div class="legend">
+      <div class="legend-item"><div class="legend-dot" style="background:#1a1a18;box-shadow:0 0 0 2px #fff,0 0 0 3.5px #1a1a18"></div> Universal backbone</div>
+      ${TYPES.map(t=>`<div class="legend-item"><div class="legend-dot" style="background:var(--${t.color})"></div>${t.label}</div>`).join('')}
+    </div>
+  </div>
+  <div class="scope-counts">
+    <div class="scope-count-pill"><span class="scope-count-num">${totalSteps}</span> total steps across all projects</div>
+    <div class="scope-count-pill"><span class="scope-count-num">${universalCount}</span> universal to every project</div>
+    <div class="scope-count-pill"><span class="scope-count-num">${specialtyCount}</span> specialty steps</div>
+  </div>`;
+
+  SCOPE_PHASES.forEach(phase => {
+    html += `<div class="scope-phase">
+      <div class="scope-phase-header">
+        <div class="scope-phase-line"></div>
+        <div class="scope-phase-name">${phase.name}</div>
+        <div class="scope-phase-line"></div>
+      </div>
+      <div class="steps">`;
+
+    phase.steps.forEach((s, si) => {
+      const [iconKey, label, detail, typeIds] = s;
+      const isUniversal = typeIds.length === ALL_IDS.length;
+      const isLast = si === phase.steps.length - 1;
+      const iconBg = isUniversal ? '#1a1a18' : `var(--${TYPES.find(t=>t.id===typeIds[0])?.color||'purple'}-light)`;
+      const iconStroke = isUniversal ? '#fff' : `var(--${TYPES.find(t=>t.id===typeIds[0])?.color||'purple'})`;
+      const lineColor = isUniversal ? '#ccc' : `var(--${TYPES.find(t=>t.id===typeIds[0])?.color||'purple'}-mid)`;
+      const universalClass = isUniversal ? ' is-universal' : '';
+
+      html += `<div class="scope-step${universalClass}" onclick="toggleScopeStep(this)">
+        <div class="scope-step-spine">
+          <div class="scope-step-icon" style="background:${iconBg};${isUniversal?'box-shadow:0 0 0 2px var(--bg),0 0 0 4px #1a1a18':''}">
+            <svg viewBox="0 0 24 24" style="fill:none;stroke:${iconStroke};stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;width:15px;height:15px;">${IC[iconKey].replace(/<svg[^>]*>/,'').replace('</svg>','')}</svg>
+          </div>
+          ${!isLast ? `<div class="scope-step-line" style="background:${lineColor}"></div>` : ''}
+        </div>
+        <div class="scope-step-body">
+          <div class="scope-step-trigger">
+            <div>
+              <div class="scope-step-label${isUniversal?' universal':''}">${label}</div>
+              <div class="type-badges">${badges(typeIds)}</div>
+            </div>
+            ${chevSVG}
+          </div>
+          <div class="scope-expand"><div class="scope-expand-inner"><div class="scope-note">${detail}</div></div></div>
+        </div>
+      </div>`;
+    });
+
+    html += `</div></div>`;
+  });
+
+  document.getElementById('scope-view').innerHTML = html;
+}
+
+// ── DETAILED VIEW BUILDERS ────────────────────────────────────────────────────
 let stepCounter = 0;
+const COLOR_MAP = { overarching:'col-purple', print:'col-teal', web:'col-blue', email:'col-amber', postprod:'col-coral', live:'col-pink' };
+const ACCENT_MAP = { overarching:'#534AB7', print:'#0F6E56', web:'#185FA5', email:'#854F0B', postprod:'#993C1D', live:'#993556' };
 
 function phase(label) {
-  return `<div class="phase-label">${label}</div>`;
+  return `<div class="phase-block"><div class="phase-header"><div class="phase-line"></div><div class="phase-name">${label}</div><div class="phase-line"></div></div>`;
 }
+function endPhase() { return `</div>`; }
 
 function step(iconKey, label, detail, opt) {
   stepCounter++;
   const optHtml = opt ? ` <span class="opt">(${opt})</span>` : '';
-  const detailHtml = detail ? `<div class="step-expand"><div class="step-expand-inner"><div class="step-note">${detail}</div></div></div>` : '';
   const hasDetail = !!detail;
+  const detailHtml = hasDetail ? `<div class="step-expand"><div class="step-expand-inner"><div class="step-note">${detail}</div></div></div>` : '';
   return `<div class="step" onclick="toggleStep(this)" style="cursor:${hasDetail?'pointer':'default'}">
-    <div class="step-spine">
-      <div class="step-icon-wrap">${ic(iconKey)}</div>
-      <div class="step-line"></div>
-    </div>
+    <div class="step-spine"><div class="step-icon-wrap">${ic(iconKey)}</div><div class="step-line"></div></div>
     <div class="step-body">
-      <div class="step-trigger">
-        <div class="step-label">${label}${optHtml}</div>
-        ${hasDetail ? chevron : ''}
-      </div>
+      <div class="step-trigger"><div class="step-label">${label}${optHtml}</div>${hasDetail?chevSVG2:''}</div>
       ${detailHtml}
     </div>
   </div>`;
 }
-
 function lastStep(iconKey, label, detail, opt) {
   stepCounter++;
   const optHtml = opt ? ` <span class="opt">(${opt})</span>` : '';
-  const detailHtml = detail ? `<div class="step-expand"><div class="step-expand-inner"><div class="step-note">${detail}</div></div></div>` : '';
   const hasDetail = !!detail;
+  const detailHtml = hasDetail ? `<div class="step-expand"><div class="step-expand-inner"><div class="step-note">${detail}</div></div></div>` : '';
   return `<div class="step" onclick="toggleStep(this)" style="cursor:${hasDetail?'pointer':'default'}">
-    <div class="step-spine">
-      <div class="step-icon-wrap">${ic(iconKey)}</div>
-    </div>
+    <div class="step-spine"><div class="step-icon-wrap">${ic(iconKey)}</div></div>
     <div class="step-body">
-      <div class="step-trigger">
-        <div class="step-label">${label}${optHtml}</div>
-        ${hasDetail ? chevron : ''}
-      </div>
+      <div class="step-trigger"><div class="step-label">${label}${optHtml}</div>${hasDetail?chevSVG2:''}</div>
       ${detailHtml}
     </div>
   </div>`;
 }
-
 function sub(items) {
-  return '<div class="sub-steps">' + items.map(([t,o]) =>
-    `<div class="sub-step"><div class="sub-dot"></div><div class="sub-label">${t}${o?` <span class="opt">(${o})</span>`:''}</div></div>`
-  ).join('') + '</div>';
+  return '<div class="sub-steps">'+items.map(([t,o])=>`<div class="sub-step"><div class="sub-dot"></div><div class="sub-label">${t}${o?` <span class="opt">(${o})</span>`:''}</div></div>`).join('')+'</div>';
 }
-
 function stepWithSub(iconKey, label, note, subItems) {
   stepCounter++;
   const noteHtml = note ? `<p style="font-size:12px;color:var(--text2);margin-bottom:6px;line-height:1.5;">${note}</p>` : '';
-  const inner = noteHtml + sub(subItems);
   return `<div class="step" onclick="toggleStep(this)" style="cursor:pointer">
-    <div class="step-spine">
-      <div class="step-icon-wrap">${ic(iconKey)}</div>
-      <div class="step-line"></div>
-    </div>
+    <div class="step-spine"><div class="step-icon-wrap">${ic(iconKey)}</div><div class="step-line"></div></div>
     <div class="step-body">
-      <div class="step-trigger">
-        <div class="step-label">${label}</div>
-        ${chevron}
-      </div>
-      <div class="step-expand"><div class="step-expand-inner">${inner}</div></div>
+      <div class="step-trigger"><div class="step-label">${label}</div>${chevSVG2}</div>
+      <div class="step-expand"><div class="step-expand-inner">${noteHtml}${sub(subItems)}</div></div>
     </div>
   </div>`;
 }
 
-// ── PANEL DEFINITIONS ─────────────────────────────────────────────────────────
-
-function buildPanel(id) {
+function buildDetailPanel(id) {
   stepCounter = 0;
-  let html = '';
-
-  if (id === 'overarching-internal') {
-    html += phase('Initiation');
-    html += step('users',   'Client meeting / request', 'Initial discovery meeting to understand scope, goals, timelines, and any existing brand guidelines or assets.');
-    html += step('file',    'Proposal & estimate development / approval', 'Internal team scopes the project, defines deliverables, and prepares a cost estimate. Sent to client for sign-off before work begins.');
-    html += phase('Planning');
-    html += stepWithSub('calendar','Planning / strategy','Internal project intake & setup — varies by project type:',[
-      ['Tech assessment','web'],['Backend setup','web'],['VO auditions','post-production video'],
-      ['Concepting','print/digital/email'],['Reference materials gathering','print/digital/email']
-    ]);
-    html += phase('Production');
-    html += stepWithSub('pencil','Production + client review','Rounds of review (R1, R2, R3…) continue until client approval — varies by project type:',[
-      ['Copywriting / design','print/digital'],['Editing / animation','video'],['Client review',''],
-      ['VO recording','re-records as needed'],['Wireframe / UX','web'],
-      ['Development staging','web'],['Litmus testing','email']
-    ]);
-    html += phase('Delivery');
-    html += step('check',   'Client approval','Final sign-off. Triggers finishing work: analytics/CMS setup, attestation, shipping, ADA remediation, Salesforce deployment as applicable.');
-    html += step('package', 'Final files delivered','All production-ready assets organized and transferred to the client via agreed method.');
-    html += step('receipt', 'Final billing','Invoice issued based on approved estimate plus any approved scope changes.');
-    html += lastStep('archive','Project closed','Project officially closed in the system. All files archived.');
+  let h = '';
+  if (id==='overarching-internal') {
+    h+=phase('Initiation');
+    h+=step('users','Client meeting / request','Initial discovery meeting to understand scope, goals, timelines, and any existing brand guidelines or assets.');
+    h+=step('file','Proposal & estimate development / approval','Internal team scopes the project and prepares a cost estimate. Sent to client for sign-off before work begins.');
+    h+=endPhase();
+    h+=phase('Planning');
+    h+=stepWithSub('calendar','Planning / strategy','Internal project intake & setup — varies by project type:',[['Tech assessment','web'],['Backend setup','web'],['VO auditions','post-production video'],['Concepting','print/digital/email'],['Reference materials gathering','print/digital/email']]);
+    h+=endPhase();
+    h+=phase('Production');
+    h+=stepWithSub('pencil','Production + client review','Rounds of review (R1, R2, R3…) continue until client approval — varies by project type:',[['Copywriting / design','print/digital'],['Editing / animation','video'],['Client review',''],['VO recording','re-records as needed'],['Wireframe / UX','web'],['Development staging','web'],['Litmus testing','email']]);
+    h+=endPhase();
+    h+=phase('Delivery');
+    h+=step('check','Client approval','Final sign-off. Triggers finishing work: analytics/CMS setup, attestation, shipping, ADA remediation, Salesforce deployment as applicable.');
+    h+=step('package','Final files delivered','All production-ready assets organized and transferred to the client.');
+    h+=step('receipt','Final billing','Invoice issued based on approved estimate plus any approved scope changes.');
+    h+=lastStep('archive','Project closed','Project officially closed. All files archived.');
+    h+=endPhase();
   }
-
-  else if (id === 'print-internal') {
-    html += phase('Initiation');
-    html += step('users',   'Client meeting / request','Initial briefing to understand the print or digital PDF objective, audience, quantity, and specs.');
-    html += step('file',    'Proposal & estimate development / approval','Scope and cost presented to client for approval. Includes print specs, quantity, paper stock, and shipping if applicable.');
-    html += step('calendar','Planning','Internal project intake and setup: assign team, open job ticket, confirm timeline.');
-    html += phase('Production');
-    html += step('pencil',  'Copywriting / design','Content and visual design developed in rounds. R1 is usually a first concept; subsequent rounds refine based on feedback.','R1, R2, R3…');
-    html += step('eye',     'Client review','Client provides consolidated written feedback on each round. Verbal feedback should be followed up in writing.','R1, R2, R3…');
-    html += phase('Approval');
-    html += step('check',   'Client approval','Written sign-off on final design. No further changes accepted after this point without a change order.');
-    html += phase('Print Production');
-    html += step('cert',    'Attestation','Required legal or compliance sign-off on content. Typically needed for regulated industries (pharma, healthcare).',null,'print only');
-    html += step('export',  'Print files prep','Final files prepared per printer specs: correct color profile (CMYK), bleed, resolution, and file format (PDF/X-1a).', null,'print only');
-    html += step('printer', 'Send to printer','Files transmitted to print vendor. Confirm receipt and production timeline.',null,'print only');
-    html += step('checks',  'Print proof review / approval','Physical or digital proof reviewed and approved before full run. Check color accuracy, trim, and fold.',null,'print only');
-    html += step('truck',   'Shipped / mailed','Print job shipped or mailed. Tracking info shared with client.',null,'print only');
-    html += phase('Digital');
-    html += step('access',  'ADA remediation','PDF made accessible per WCAG standards: tagged headings, alt text, reading order, color contrast.',null,'digital PDFs only');
-    html += phase('Close-out');
-    html += step('package', 'Final files delivered','All native and production files organized and delivered.');
-    html += step('receipt', 'Final billing','Invoice issued.');
-    html += lastStep('archive','Project closed','Job ticket closed and files archived.');
+  else if (id==='print-internal') {
+    h+=phase('Initiation');h+=step('users','Client meeting / request','Initial briefing to understand the print or digital PDF objective, audience, quantity, and specs.');h+=step('file','Proposal & estimate development / approval','Scope and cost presented to client for approval. Includes print specs, quantity, paper stock, and shipping if applicable.');h+=step('calendar','Planning','Internal project intake and setup: assign team, open job ticket, confirm timeline.');h+=endPhase();
+    h+=phase('Production');h+=step('pencil','Copywriting / design','Content and visual design developed in rounds. R1 is usually a first concept; subsequent rounds refine based on feedback.','R1, R2, R3…');h+=step('eye','Client review','Client provides consolidated written feedback on each round.','R1, R2, R3…');h+=endPhase();
+    h+=phase('Approval');h+=step('check','Client approval','Written sign-off on final design. No further changes accepted after this point without a change order.');h+=endPhase();
+    h+=phase('Print Production');h+=step('cert','Attestation','Required legal or compliance sign-off on content.',null,'print only');h+=step('export','Print files prep','Final files prepared per printer specs: CMYK, bleed, resolution, PDF/X-1a.',null,'print only');h+=step('printer','Send to printer','Files transmitted to print vendor. Confirm receipt and production timeline.',null,'print only');h+=step('checks','Print proof review / approval','Physical or digital proof reviewed before full run.',null,'print only');h+=step('truck','Shipped / mailed','Print job shipped or mailed. Tracking info shared with client.',null,'print only');h+=endPhase();
+    h+=phase('Digital');h+=step('access','ADA remediation','PDF made accessible per WCAG standards: tagged headings, alt text, reading order, color contrast.',null,'digital PDFs only');h+=endPhase();
+    h+=phase('Close-out');h+=step('package','Final files delivered','All native and production files organized and delivered.');h+=step('receipt','Final billing','Invoice issued.');h+=lastStep('archive','Project closed','Job ticket closed and files archived.');h+=endPhase();
   }
-
-  else if (id === 'print-external') {
-    html += phase('Initiation');
-    html += step('users',   'Client meeting / request','');
-    html += step('file',    'Proposal approved','');
-    html += phase('Production');
-    html += step('pencil',  'Copywriting / design','','R1, R2, R3…');
-    html += step('eye',     'Client review','','R1, R2, R3…');
-    html += phase('Approval & Production');
-    html += step('check',   'Client approval','');
-    html += step('printer', 'With printer','',null,'print only');
-    html += step('truck',   'Shipped / mailed','',null,'print only');
-    html += step('access',  'ADA remediation','',null,'digital PDFs only');
-    html += lastStep('package','Final files delivered / project closed','');
+  else if (id==='print-external') {
+    h+=phase('Initiation');h+=step('users','Client meeting / request','');h+=step('file','Proposal approved','');h+=endPhase();
+    h+=phase('Production');h+=step('pencil','Copywriting / design','','R1, R2, R3…');h+=step('eye','Client review','','R1, R2, R3…');h+=endPhase();
+    h+=phase('Approval & Production');h+=step('check','Client approval','');h+=step('printer','With printer','',null,'print only');h+=step('truck','Shipped / mailed','',null,'print only');h+=step('access','ADA remediation','',null,'digital PDFs only');h+=lastStep('package','Final files delivered / project closed','');h+=endPhase();
   }
-
-  else if (id === 'web-internal') {
-    html += phase('Initiation');
-    html += step('users',   'Client request received','Scope, goals, and technical requirements gathered.');
-    html += step('file',    'Proposal & estimate development / approval','Includes hosting, CMS, integrations, and projected timeline.');
-    html += phase('Planning');
-    html += step('calendar','Planning','Internal project setup: team assignment, timeline, kick-off meeting.');
-    html += step('search',  'Tech assessment','Evaluate platform requirements, integrations, third-party tools, and any legacy system considerations.');
-    html += step('server',  'Backend setup','CMS, hosting, and development environment configured. Staging server prepared.');
-    html += phase('Content & Design');
-    html += step('pencil',  'Copywriting','Page copy written. SEO considerations baked in from the start.');
-    html += step('eye',     'Client review','');
-    html += step('palette', 'Styleframes / design concepts','Visual direction established — typography, color, layout system, key page templates.');
-    html += step('eye',     'Client review','');
-    html += step('layout',  'Wireframe / UX','Full site wireframes produced showing structure, navigation, and content hierarchy.');
-    html += step('check',   'Client review / approval','');
-    html += phase('Development');
-    html += step('code',    'Development (staging)','Front-end and back-end built on staging. Responsive across breakpoints. Forms, integrations, and CMS configured.');
-    html += step('eye',     'Client review','Client reviews the live staging site and provides consolidated feedback.');
-    html += phase('Launch');
-    html += step('chart_b', 'Analytics / CMS / hosting setup','GA4 or analytics platform configured. CMS permissions, content training if needed. Hosting DNS prep.');
-    html += step('bug',     'Final testing / QA','Cross-browser and cross-device testing. Accessibility check. Link, form, and load-speed audit.');
-    html += step('check',   'Client approval','');
-    html += step('rocket',  'Deployment / push live','Site pushed from staging to production. DNS updated. Redirect rules confirmed.');
-    html += phase('Post-launch');
-    html += step('chart_l', 'Analytics dashboard','Dashboard configured and shared with client for ongoing monitoring.');
-    html += lastStep('cliplist','Reporting','First performance report delivered at agreed interval.');
+  else if (id==='web-internal') {
+    h+=phase('Initiation');h+=step('users','Client request received','Scope, goals, and technical requirements gathered.');h+=step('file','Proposal & estimate development / approval','Includes hosting, CMS, integrations, and projected timeline.');h+=endPhase();
+    h+=phase('Planning');h+=step('calendar','Planning','Internal project setup: team assignment, timeline, kick-off meeting.');h+=step('search','Tech assessment','Evaluate platform requirements, integrations, third-party tools, and any legacy system considerations.');h+=step('server','Backend setup','CMS, hosting, and development environment configured. Staging server prepared.');h+=endPhase();
+    h+=phase('Content & Design');h+=step('pencil','Copywriting','Page copy written. SEO considerations baked in from the start.');h+=step('eye','Client review','');h+=step('palette','Styleframes / design concepts','Visual direction established — typography, color, layout system, key page templates.');h+=step('eye','Client review','');h+=step('layout','Wireframe / UX','Full site wireframes produced showing structure, navigation, and content hierarchy.');h+=step('check','Client review / approval','');h+=endPhase();
+    h+=phase('Development');h+=step('code','Development (staging)','Front-end and back-end built on staging. Responsive across breakpoints. Forms, integrations, and CMS configured.');h+=step('eye','Client review','Client reviews the live staging site and provides consolidated feedback.');h+=endPhase();
+    h+=phase('Launch');h+=step('chart_b','Analytics / CMS / hosting setup','GA4 configured. CMS permissions, content training if needed. Hosting DNS prep.');h+=step('bug','Final testing / QA','Cross-browser and cross-device testing. Accessibility check. Link, form, and load-speed audit.');h+=step('check','Client approval','');h+=step('rocket','Deployment / push live','Site pushed from staging to production. DNS updated. Redirect rules confirmed.');h+=endPhase();
+    h+=phase('Post-launch');h+=step('chart_l','Analytics dashboard','Dashboard configured and shared with client.');h+=lastStep('cliplist','Reporting','First performance report delivered at agreed interval.');h+=endPhase();
   }
-
-  else if (id === 'web-external') {
-    html += phase('Initiation');
-    html += step('users',   'Client request received','');
-    html += step('file',    'Proposal approved','');
-    html += phase('Content & Design');
-    html += step('pencil',  'Copywriting','');
-    html += step('eye',     'Client review','');
-    html += step('layout',  'Styleframes / UX','');
-    html += step('eye',     'Client review','');
-    html += phase('Development');
-    html += step('code',    'Development (staging)','');
-    html += step('eye',     'Client review','');
-    html += phase('Launch');
-    html += step('bug',     'Final testing','');
-    html += step('check',   'Client approval','');
-    html += lastStep('rocket','Deployment / push live','');
+  else if (id==='web-external') {
+    h+=phase('Initiation');h+=step('users','Client request received','');h+=step('file','Proposal approved','');h+=endPhase();
+    h+=phase('Content & Design');h+=step('pencil','Copywriting','');h+=step('eye','Client review','');h+=step('layout','Styleframes / UX','');h+=step('eye','Client review','');h+=endPhase();
+    h+=phase('Development');h+=step('code','Development (staging)','');h+=step('eye','Client review','');h+=endPhase();
+    h+=phase('Launch');h+=step('bug','Final testing','');h+=step('check','Client approval','');h+=lastStep('rocket','Deployment / push live','');h+=endPhase();
   }
-
-  else if (id === 'email-internal') {
-    html += phase('Initiation');
-    html += step('users',   'Client request received','Campaign goal, audience, send date, and Salesforce list details gathered.');
-    html += step('file',    'Proposal & estimate development / approval','');
-    html += step('calendar','Planning','Job opened. Send date confirmed with deployment team.');
-    html += phase('Content & Design');
-    html += step('pencil',  'Copywriting','Subject line, preheader, headline, body, and CTA written with send goal in mind.');
-    html += step('palette', 'Email design','Design built to email-safe standards: inline CSS, max ~600px wide, accessible color contrast.');
-    html += step('check',   'Client review / approval','Consolidated feedback collected and final copy/design signed off in writing.');
-    html += phase('Development & QA');
-    html += step('code',    'Dev intake','HTML coded and handed off. Email-safe markup: tables, inline styles, no web fonts.');
-    html += step('cloud',   'Salesforce ID confirmations','List IDs, journey IDs, and sending domain confirmed with Salesforce team.');
-    html += step('bug',     'Final testing','Litmus or Email on Acid render test across clients. Links, UTM parameters, and unsubscribe checked.');
-    html += step('checks',  'Proof approval','Final live proof approved by client and/or compliance before deployment.');
-    html += phase('Deployment');
-    html += step('send',    'Deployment','Email sent. Send time confirmed and documented.');
-    html += step('chart_b', 'Analytics','Open rate, CTR, and conversion data reviewed post-send.');
-    html += lastStep('cliplist','Reporting','Performance report delivered to client.');
+  else if (id==='email-internal') {
+    h+=phase('Initiation');h+=step('users','Client request received','Campaign goal, audience, send date, and Salesforce list details gathered.');h+=step('file','Proposal & estimate development / approval','');h+=step('calendar','Planning','Job opened. Send date confirmed with deployment team.');h+=endPhase();
+    h+=phase('Content & Design');h+=step('pencil','Copywriting','Subject line, preheader, headline, body, and CTA written with send goal in mind.');h+=step('palette','Email design','Design built to email-safe standards: inline CSS, max ~600px wide, accessible color contrast.');h+=step('check','Client review / approval','Consolidated feedback collected and final copy/design signed off in writing.');h+=endPhase();
+    h+=phase('Development & QA');h+=step('code','Dev intake','HTML coded. Email-safe markup: tables, inline styles, no web fonts.');h+=step('cloud','Salesforce ID confirmations','List IDs, journey IDs, and sending domain confirmed with Salesforce team.');h+=step('bug','Final testing','Litmus or Email on Acid render test across clients. Links, UTM parameters, and unsubscribe checked.');h+=step('checks','Proof approval','Final live proof approved by client and/or compliance before deployment.');h+=endPhase();
+    h+=phase('Deployment');h+=step('send','Deployment','Email sent. Send time confirmed and documented.');h+=step('chart_b','Analytics','Open rate, CTR, and conversion data reviewed post-send.');h+=lastStep('cliplist','Reporting','Performance report delivered to client.');h+=endPhase();
   }
-
-  else if (id === 'email-external') {
-    html += phase('Initiation');
-    html += step('users',   'Client request received','');
-    html += step('file',    'Proposal approved','');
-    html += phase('Content & Design');
-    html += step('pencil',  'Copywriting','');
-    html += step('palette', 'Email design','');
-    html += step('check',   'Client review / approval','');
-    html += phase('QA & Deployment');
-    html += step('bug',     'Final testing','');
-    html += step('checks',  'Proof approval','');
-    html += lastStep('send','Deployment','');
+  else if (id==='email-external') {
+    h+=phase('Initiation');h+=step('users','Client request received','');h+=step('file','Proposal approved','');h+=endPhase();
+    h+=phase('Content & Design');h+=step('pencil','Copywriting','');h+=step('palette','Email design','');h+=step('check','Client review / approval','');h+=endPhase();
+    h+=phase('QA & Deployment');h+=step('bug','Final testing','');h+=step('checks','Proof approval','');h+=lastStep('send','Deployment','');h+=endPhase();
   }
-
-  else if (id === 'postprod-internal') {
-    html += phase('Initiation');
-    html += step('users',   'Client request received','Goals, runtime, format, platform (web, broadcast, social), and deadline discussed.');
-    html += step('file',    'Proposal & estimate development / approval','Includes VO, music licensing, stock footage, color, and mix estimates.');
-    html += step('calendar','Planning','Internal kick-off. Team assigned. Production schedule set.');
-    html += phase('Pre-production');
-    html += step('notes',   'Script writing','Narrative structure outlined and script written. Tone and messaging aligned to brief.');
-    html += step('eye',     'Client review','');
-    html += step('board',   'Design concepts / storyboards','Visual approach established. Motion style, pacing, and key frames defined.');
-    html += step('eye',     'Client review','');
-    html += step('mic',     'VO auditions','Talent shortlist auditioned. Client selects preferred voice.',null,'if needed');
-    html += step('check',   'VO approval','',null,'if needed');
-    html += phase('Production');
-    html += step('cut',     'Editing / animation','Picture edit and/or animation assembled. Music temp track placed. Initial mix.');
-    html += step('eye',     'Client review','');
-    html += step('mic2',    'VO recording','Selected talent records final script. Re-records captured as needed.',null,'re-records as needed');
-    html += phase('Delivery');
-    html += step('check',   'Client approval','Final sign-off on locked picture and audio.');
-    html += step('sparkles','Finishing steps','Captions, final mix, stock purchase, music licensing, AD services, color grade, and any deliverable variants.');
-    html += step('floppy',  'Final export','Master file and all required deliverable specs exported.');
-    html += lastStep('package','Delivery','Files transferred via agreed method. All assets and project files archived.');
+  else if (id==='postprod-internal') {
+    h+=phase('Initiation');h+=step('users','Client request received','Goals, runtime, format, platform, and deadline discussed.');h+=step('file','Proposal & estimate development / approval','Includes VO, music licensing, stock footage, color, and mix estimates.');h+=step('calendar','Planning','Internal kick-off. Team assigned. Production schedule set.');h+=endPhase();
+    h+=phase('Pre-production');h+=step('notes','Script writing','Narrative structure outlined and script written. Tone and messaging aligned to brief.');h+=step('eye','Client review','');h+=step('board','Design concepts / storyboards','Visual approach established. Motion style, pacing, and key frames defined.');h+=step('eye','Client review','');h+=step('mic','VO auditions','Talent shortlist auditioned. Client selects preferred voice.',null,'if needed');h+=step('check','VO approval','',null,'if needed');h+=endPhase();
+    h+=phase('Production');h+=step('cut','Editing / animation','Picture edit and/or animation assembled. Music temp track placed. Initial mix.');h+=step('eye','Client review','');h+=step('mic2','VO recording','Selected talent records final script. Re-records captured as needed.',null,'re-records as needed');h+=endPhase();
+    h+=phase('Delivery');h+=step('check','Client approval','Final sign-off on locked picture and audio.');h+=step('sparkles','Finishing steps','Captions, final mix, stock purchase, music licensing, AD services, color grade, and any deliverable variants.');h+=step('floppy','Final export','Master file and all required deliverable specs exported.');h+=lastStep('package','Delivery','Files transferred via agreed method. All assets archived.');h+=endPhase();
   }
-
-  else if (id === 'postprod-external') {
-    html += phase('Initiation');
-    html += step('users',   'Client request received','');
-    html += step('file',    'Proposal approved','');
-    html += phase('Pre-production');
-    html += step('notes',   'Script writing','');
-    html += step('eye',     'Client review','');
-    html += step('board',   'Design concepts / storyboards','');
-    html += step('eye',     'Client review','');
-    html += phase('Production');
-    html += step('cut',     'Editing / animation','');
-    html += step('check',   'Client review / approval','');
-    html += lastStep('package','Delivery','');
+  else if (id==='postprod-external') {
+    h+=phase('Initiation');h+=step('users','Client request received','');h+=step('file','Proposal approved','');h+=endPhase();
+    h+=phase('Pre-production');h+=step('notes','Script writing','');h+=step('eye','Client review','');h+=step('board','Design concepts / storyboards','');h+=step('eye','Client review','');h+=endPhase();
+    h+=phase('Production');h+=step('cut','Editing / animation','');h+=step('check','Client review / approval','');h+=endPhase();
+    h+=phase('Delivery');h+=lastStep('package','Delivery','');h+=endPhase();
   }
-
-  else if (id === 'live-internal') {
-    html += phase('Initiation');
-    html += step('users',   'Client request received','Goals, shoot format, talent needs, locations, and post-production scope discussed.');
-    html += step('file',    'Proposal & estimate development / approval','Includes crew, equipment, location fees, casting, wardrobe, and post.');
-    html += step('calendar','Planning','Internal kick-off. Roles assigned. Pre-production schedule built.');
-    html += phase('Pre-production');
-    html += step('board',   'Design concepts / storyboards / copywriting','Creative direction, shot list, script or interview questions developed.');
-    html += step('eye',     'Client review','');
-    html += step('usearch', 'Casting auditions','Talent auditioned and selected.',null,'if needed');
-    html += step('pin',     'Location selection','Scout and confirm locations. Permits obtained if required.',null,'if needed');
-    html += step('armchair','Set dressing / prop approval','All set elements, props, and wardrobe reviewed and approved by client.');
-    html += step('clipchk', 'Final pre-production meeting','Full team alignment call. Shot list, schedule, logistics, and contingencies confirmed.');
-    html += phase('Production');
-    html += step('video',   'Live shoot','On-location or studio filming. Director manages performance and shot list. Client may attend.');
-    html += phase('Post-production');
-    html += step('cut',     'Editing / animation','Footage reviewed and selects pulled. Assembly cut built. Graphics and motion design added.');
-    html += step('mic',     'VO auditions','',null,'if needed');
-    html += step('eye',     'Client review','');
-    html += step('mic2',    'VO recording','',null,'re-records as needed');
-    html += phase('Delivery');
-    html += step('check',   'Client approval','Final locked approval on picture, audio, and graphics.');
-    html += step('sparkles','Finishing steps','Captions, final mix, color grade, music licensing, AD services, deliverable variants.');
-    html += step('floppy',  'Final export','');
-    html += lastStep('package','Delivery','');
+  else if (id==='live-internal') {
+    h+=phase('Initiation');h+=step('users','Client request received','Goals, shoot format, talent needs, locations, and post-production scope discussed.');h+=step('file','Proposal & estimate development / approval','Includes crew, equipment, location fees, casting, wardrobe, and post.');h+=step('calendar','Planning','Internal kick-off. Roles assigned. Pre-production schedule built.');h+=endPhase();
+    h+=phase('Pre-production');h+=step('board','Design concepts / storyboards / copywriting','Creative direction, shot list, script or interview questions developed.');h+=step('eye','Client review','');h+=step('usearch','Casting auditions','Talent auditioned and selected.',null,'if needed');h+=step('pin','Location selection','Scout and confirm locations. Permits obtained if required.',null,'if needed');h+=step('armchair','Set dressing / prop approval','All set elements, props, and wardrobe reviewed and approved by client.');h+=step('clipchk','Final pre-production meeting','Full team alignment call. Shot list, schedule, logistics, and contingencies confirmed.');h+=endPhase();
+    h+=phase('Production');h+=step('video','Live shoot','On-location or studio filming. Director manages performance and shot list. Client may attend.');h+=endPhase();
+    h+=phase('Post-production');h+=step('cut','Editing / animation','Footage reviewed and selects pulled. Assembly cut built. Graphics and motion design added.');h+=step('mic','VO auditions','',null,'if needed');h+=step('eye','Client review','');h+=step('mic2','VO recording','',null,'re-records as needed');h+=endPhase();
+    h+=phase('Delivery');h+=step('check','Client approval','Final locked approval on picture, audio, and graphics.');h+=step('sparkles','Finishing steps','Captions, final mix, color grade, music licensing, AD services, deliverable variants.');h+=step('floppy','Final export','');h+=lastStep('package','Delivery','');h+=endPhase();
   }
-
-  else if (id === 'live-external') {
-    html += phase('Initiation');
-    html += step('users',   'Client request received','');
-    html += step('file',    'Proposal & estimate development / approval','');
-    html += phase('Pre-production');
-    html += step('board',   'Design concepts / storyboards / copywriting','');
-    html += step('eye',     'Client review','');
-    html += step('usearch', 'Casting auditions','',null,'if needed');
-    html += step('pin',     'Location selection','',null,'if needed');
-    html += step('armchair','Set dressing / prop approval','');
-    html += step('clipchk', 'Final pre-production meeting','');
-    html += phase('Production');
-    html += step('video',   'Live shoot','');
-    html += phase('Post-production');
-    html += step('cut',     'Editing / animation','');
-    html += step('mic',     'VO auditions','',null,'if needed');
-    html += step('eye',     'Client review','');
-    html += step('mic2',    'VO recording','',null,'re-records as needed');
-    html += phase('Delivery');
-    html += step('check',   'Client approval','');
-    html += step('floppy',  'Final export','');
-    html += lastStep('package','Delivery','');
+  else if (id==='live-external') {
+    h+=phase('Initiation');h+=step('users','Client request received','');h+=step('file','Proposal & estimate development / approval','');h+=endPhase();
+    h+=phase('Pre-production');h+=step('board','Design concepts / storyboards / copywriting','');h+=step('eye','Client review','');h+=step('usearch','Casting auditions','',null,'if needed');h+=step('pin','Location selection','',null,'if needed');h+=step('armchair','Set dressing / prop approval','');h+=step('clipchk','Final pre-production meeting','');h+=endPhase();
+    h+=phase('Production');h+=step('video','Live shoot','');h+=endPhase();
+    h+=phase('Post-production');h+=step('cut','Editing / animation','');h+=step('mic','VO auditions','',null,'if needed');h+=step('eye','Client review','');h+=step('mic2','VO recording','',null,'re-records as needed');h+=endPhase();
+    h+=phase('Delivery');h+=step('check','Client approval','');h+=step('floppy','Final export','');h+=lastStep('package','Delivery','');h+=endPhase();
   }
-
-  return { html, count: stepCounter };
+  return { html: h, count: stepCounter };
 }
 
-// ── PANEL COLORS ──────────────────────────────────────────────────────────────
-const COLOR = {
-  overarching: 'col-purple',
-  print:       'col-teal',
-  web:         'col-blue',
-  email:       'col-amber',
-  postprod:    'col-coral',
-  live:        'col-pink',
-};
-
-const ACCENT = {
-  overarching: '#534AB7', print: '#0F6E56', web: '#185FA5',
-  email: '#854F0B', postprod: '#993C1D', live: '#993556',
-};
-
-// ── TAB DEFINITIONS ───────────────────────────────────────────────────────────
-const TABS = [
-  { type: 'overarching', label: 'Overarching flow', icon: 'layers',  hasToggle: false },
-  { type: 'print',       label: 'Print & digital',  icon: 'print',   hasToggle: true },
-  { type: 'web',         label: 'Web',              icon: 'globe',   hasToggle: true },
-  { type: 'email',       label: 'Email',            icon: 'mail',    hasToggle: true },
-  { type: 'postprod',    label: 'Post-prod video',  icon: 'film',    hasToggle: true },
-  { type: 'live',        label: 'Live shoot',       icon: 'camera',  hasToggle: true },
+// ── DETAILED VIEW RENDER ──────────────────────────────────────────────────────
+const DETAIL_TABS = [
+  { type:'overarching', label:'Overarching flow', icon:'layers',   hasToggle:false },
+  { type:'print',       label:'Print & digital',  icon:'printTab', hasToggle:true  },
+  { type:'web',         label:'Web',              icon:'globe',    hasToggle:true  },
+  { type:'email',       label:'Email',            icon:'mail',     hasToggle:true  },
+  { type:'postprod',    label:'Post-prod video',  icon:'film',     hasToggle:true  },
+  { type:'live',        label:'Live shoot',       icon:'camera',   hasToggle:true  },
 ];
 
-// ── STATE & RENDER ────────────────────────────────────────────────────────────
 let currentType = 'overarching', currentView = 'internal';
 
-function renderTabs() {
-  const row = document.getElementById('type-row');
-  row.innerHTML = TABS.map(t => `
+function renderDetailTabs() {
+  document.getElementById('type-row').innerHTML = DETAIL_TABS.map(t=>`
     <button class="type-tab${t.type===currentType?' active':''}" data-type="${t.type}" onclick="selectType('${t.type}')">
       ${IC[t.icon]} ${t.label}
     </button>`).join('');
 }
 
-function renderPanel() {
-  const panelId = currentType === 'overarching' ? 'overarching-internal' : `${currentType}-${currentView}`;
-  const colClass = COLOR[currentType];
-  const accent = ACCENT[currentType];
-  const { html: stepsHtml, count } = buildPanel(panelId);
-
+function renderDetailPanel() {
+  const panelId = currentType==='overarching' ? 'overarching-internal' : `${currentType}-${currentView}`;
+  const colClass = COLOR_MAP[currentType];
+  const accent = ACCENT_MAP[currentType];
+  const {html: stepsHtml, count} = buildDetailPanel(panelId);
   const titles = {
-    'overarching-internal': ['Overarching MOD/MODHealth project flow', 'High-level master process covering all project types'],
-    'print-internal':  ['Print & digital — internal', 'Task-based workflow'],
-    'print-external':  ['Print & digital — external', 'Status-based workflow'],
-    'web-internal':    ['Web — internal', ''],
-    'web-external':    ['Web — external', ''],
-    'email-internal':  ['Email — internal', ''],
-    'email-external':  ['Email — external', ''],
-    'postprod-internal': ['Post-production video — internal', ''],
-    'postprod-external': ['Post-production video — external', ''],
-    'live-internal':   ['Live shoot — internal', ''],
-    'live-external':   ['Live shoot — external', ''],
+    'overarching-internal':['Overarching MOD/MODHealth project flow','High-level master process covering all project types'],
+    'print-internal':['Print & digital — internal','Task-based workflow'],'print-external':['Print & digital — external','Status-based workflow'],
+    'web-internal':['Web — internal',''],'web-external':['Web — external',''],
+    'email-internal':['Email — internal',''],'email-external':['Email — external',''],
+    'postprod-internal':['Post-production video — internal',''],'postprod-external':['Post-production video — external',''],
+    'live-internal':['Live shoot — internal',''],'live-external':['Live shoot — external',''],
   };
-  const [title, sub] = titles[panelId] || ['',''];
-  const subHtml = sub ? `<div class="flow-sub">${sub}</div>` : '';
-
-  document.getElementById('main').innerHTML = `
+  const [title, sub_] = titles[panelId]||['',''];
+  document.getElementById('detail-panel').innerHTML = `
     <div class="panel-wrap ${colClass}" style="--accent-color:${accent}">
       <div class="flow-header">
         <div class="flow-header-text">
           <div class="flow-title">${title}</div>
-          ${subHtml}
+          ${sub_?`<div class="flow-sub">${sub_}</div>`:''}
         </div>
         <div class="step-count">
           <div class="step-count-num">${count}</div>
@@ -606,34 +710,38 @@ function renderPanel() {
 }
 
 function selectType(type) {
-  currentType = type; currentView = 'internal';
-  renderTabs();
-  const tab = TABS.find(t => t.type === type);
+  currentType=type; currentView='internal';
+  renderDetailTabs();
+  const tab = DETAIL_TABS.find(t=>t.type===type);
   const bar = document.getElementById('toggle-bar');
-  if (tab && tab.hasToggle) {
-    bar.classList.add('visible');
-    document.querySelectorAll('.toggle-btn').forEach(b => b.classList.toggle('active', b.dataset.view === 'internal'));
-  } else {
-    bar.classList.remove('visible');
-  }
-  renderPanel();
+  if (tab?.hasToggle) { bar.classList.add('visible'); document.querySelectorAll('.toggle-btn').forEach(b=>b.classList.toggle('active',b.dataset.view==='internal')); }
+  else { bar.classList.remove('visible'); }
+  renderDetailPanel();
 }
 
 function selectView(view) {
-  currentView = view;
-  document.querySelectorAll('.toggle-btn').forEach(b => b.classList.toggle('active', b.dataset.view === view));
-  renderPanel();
+  currentView=view;
+  document.querySelectorAll('.toggle-btn').forEach(b=>b.classList.toggle('active',b.dataset.view===view));
+  renderDetailPanel();
 }
 
-function toggleStep(el) {
-  const expand = el.querySelector('.step-expand');
-  if (!expand) return;
-  el.classList.toggle('open');
+// ── MODE SWITCHING ────────────────────────────────────────────────────────────
+function setMode(mode) {
+  document.getElementById('tab-scope').classList.toggle('active', mode==='scope');
+  document.getElementById('tab-detail').classList.toggle('active', mode==='detail');
+  document.getElementById('scope-view').style.display = mode==='scope' ? '' : 'none';
+  document.getElementById('detail-view').style.display = mode==='detail' ? '' : 'none';
 }
 
+// ── TOGGLE INTERACTIONS ───────────────────────────────────────────────────────
+function toggleStep(el) { const e=el.querySelector('.step-expand'); if(e) el.classList.toggle('open'); }
+function toggleScopeStep(el) { const e=el.querySelector('.scope-expand'); if(e) el.classList.toggle('open'); }
+
+// ── INIT ──────────────────────────────────────────────────────────────────────
 window.addEventListener('DOMContentLoaded', () => {
-  renderTabs();
-  renderPanel();
+  renderScopeView();
+  renderDetailTabs();
+  renderDetailPanel();
 });
 </script>
 </body>
